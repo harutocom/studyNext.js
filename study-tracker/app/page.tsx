@@ -6,11 +6,11 @@ const sampleTasks = [
 
 export default function Home() {
   return (
-    <main>
-      <h1>データ一覧</h1>
+    <main className="flex flex-col items-center justify-center">
+      <h1 className="mt-[40px] mb-[10px]">データ一覧</h1>
       <ul>
         {sampleTasks.map((task) => (
-          <li key={task.id}>
+          <li key={task.id} className="my-[10px]">
             <h2>{task.title}</h2>
             <p>状態：{task.status}</p>
           </li>
