@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 // Taskの型を定義
-type Task = {
+export type Task = {
   id: number;
   title: string;
   status: string;
