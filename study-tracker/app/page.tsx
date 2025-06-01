@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const sampleTasks = [
   { id: 1, title: "あ", status: "未完了" },
   { id: 2, title: "い", status: "完了" },
@@ -16,6 +18,7 @@ export default function Home() {
           </li>
         ))}
       </ul>
+      <Link href="/new">ページを追加</Link>
     </main>
   );
 }
