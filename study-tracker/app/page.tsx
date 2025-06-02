@@ -17,6 +17,7 @@ export default function Home() {
             <h2>
               {task.title}
               状態：{task.status}
+              <Link href={`./edit/${task.id}`}>編集</Link>
               <button onClick={() => deleteTask({ taskId: task.id })}>
                 削除
               </button>
