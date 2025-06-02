@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useTasks } from "@/context/taskContext";
+import { useTaskActions } from "@/context/taskContext";
 
 export default function Home() {
   const { tasks } = useTasks();
+  const { deleteTask } = useTaskActions();
 
   return (
     <main className="flex flex-col items-center justify-center">
@@ -12,8 +14,13 @@ export default function Home() {
       <ul>
         {tasks.map((task) => (
           <li key={task.id} className="my-[10px]">
-            <h2>{task.title}</h2>
-            <p>状態：{task.status}</p>
+            <h2>
+              {task.title}
+              状態：{task.status}
+              <button onClick={() => deleteTask({ taskId: task.id })}>
+                削除
+              </button>
+            </h2>
           </li>
         ))}
       </ul>

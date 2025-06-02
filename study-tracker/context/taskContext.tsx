@@ -17,7 +17,7 @@ type TaskContextType = {
   // Dispatchで型定義をReactに投げる
 };
 
-type Id = {
+export type Id = {
   taskId: number;
 };
 
