@@ -17,6 +17,10 @@ type TaskContextType = {
   // Dispatchで型定義をReactに投げる
 };
 
+type Id = {
+  taskId: number;
+};
+
 const TaskContext = createContext<TaskContextType | null>(null);
 // Contextを作成
 
@@ -39,4 +43,17 @@ export function useTasks() {
     // Contextが無かったらエラーを投げる
   }
   return context;
+}
+
+// コンテキスト内での関数をまとめて定義
+export function useTaskActions() {
+  const { tasks, setTasks } = useTasks();
+
+  // 削除関数を作成
+  function deleteTask({ taskId }: Id) {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+  }
+
+  return { deleteTask };
 }
