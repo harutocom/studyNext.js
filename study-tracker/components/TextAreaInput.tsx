@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useTasks } from "@/context/taskContext";
 import { Task } from "@/context/taskContext";
 
-type Props = {
+export type Props = {
   taskId: number | null;
 };
 
