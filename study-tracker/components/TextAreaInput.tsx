@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTasks } from "@/context/TaskContext";
-import { Task } from "@/context/TaskContext";
+import { useTasks } from "@/context/taskContext";
+import { Task } from "@/context/taskContext";
 
 type Props = {
   taskId: number | null;

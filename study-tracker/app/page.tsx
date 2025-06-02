@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTasks } from "@/context/TaskContext";
+import { useTasks } from "@/context/taskContext";
 
 export default function Home() {
   const { tasks } = useTasks();
