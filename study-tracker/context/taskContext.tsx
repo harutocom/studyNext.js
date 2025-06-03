@@ -13,6 +13,9 @@ export type Task = {
 type TaskContextType = {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  doneTasks: Task[];
+  setDoneTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+
   // setの関数はReact側で定義できるので引数の型だけ定義して
   // Dispatchで型定義をReactに投げる
 };
@@ -27,9 +30,10 @@ const TaskContext = createContext<TaskContextType | null>(null);
 // Providerの関数を作ってコンテキストを使える場所を決める
 export function TaskProvider({ children }: { children: ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]); // 空の配列を初期値にして定義
+  const [doneTasks, setDoneTasks] = useState<Task[]>([]);
 
   return (
-    <TaskContext.Provider value={{ tasks, setTasks }}>
+    <TaskContext.Provider value={{ tasks, setTasks, doneTasks, setDoneTasks }}>
       {children}
     </TaskContext.Provider>
   );
@@ -48,6 +52,7 @@ export function useTasks() {
 // コンテキスト内での関数をまとめて定義
 export function useTaskActions() {
   const { tasks, setTasks } = useTasks();
+  const { doneTasks, setDoneTasks } = useTasks();
 
   // 削除関数を作成
   function deleteTask({ taskId }: Id) {
@@ -55,5 +60,21 @@ export function useTaskActions() {
     setTasks(updatedTasks);
   }
 
-  return { deleteTask };
+  // タスクを完了させる関数
+  function doneTask({ taskId }: Id) {
+    const doneTask = tasks.find((item) => item.id === taskId);
+    if (doneTask == undefined) {
+      return <p>IDに一致するタスクが見つかりません</p>;
+    }
+
+    const newDoneTask: Task = {
+      id: doneTasks.length + 1,
+      title: doneTask.title,
+      status: "完了",
+    };
+
+    setDoneTasks([...doneTasks, newDoneTask]);
+    deleteTask({ taskId: taskId });
+  }
+  return { deleteTask, doneTask };
 }
