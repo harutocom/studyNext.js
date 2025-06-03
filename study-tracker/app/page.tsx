@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTasks } from "@/context/taskContext";
 import { useTaskActions } from "@/context/taskContext";
+import Button from "@/components/ui/Button";
 
 export default function Home() {
   const { tasks } = useTasks();
@@ -18,9 +19,11 @@ export default function Home() {
               {task.title}
               状態：{task.status}
               <Link href={`./edit/${task.id}`}>編集</Link>
-              <button onClick={() => deleteTask({ taskId: task.id })}>
-                削除
-              </button>
+              <Button
+                ButtonText="削除"
+                onClick={() => deleteTask({ taskId: task.id })}
+              />
+              {/* <Button ButtonText="完了" /> */}
             </h2>
           </li>
         ))}
