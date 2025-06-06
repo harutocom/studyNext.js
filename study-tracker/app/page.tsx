@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button";
 
 export default function Home() {
   const { tasks, doneTasks } = useTasks();
-  const { deleteTask, doneTask } = useTaskActions();
+  const { deleteTask, doneTask, deleteDoneTask } = useTaskActions();
 
   return (
     <main className="flex flex-col items-center justify-center">
@@ -39,6 +39,10 @@ export default function Home() {
             <h2>
               {doneTask.title}
               状態：{doneTask.status}
+              <Button
+                ButtonText="削除"
+                onClick={() => deleteDoneTask({ taskId: doneTask.id })}
+              />
             </h2>
           </li>
         ))}

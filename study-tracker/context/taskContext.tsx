@@ -76,5 +76,11 @@ export function useTaskActions() {
     setDoneTasks([...doneTasks, newDoneTask]);
     deleteTask({ taskId: taskId });
   }
-  return { deleteTask, doneTask };
+
+  function deleteDoneTask({ taskId }: Id) {
+    const updateTasks = doneTasks.filter((task) => task.id !== taskId);
+    setDoneTasks(updateTasks);
+  }
+
+  return { deleteTask, doneTask, deleteDoneTask };
 }
